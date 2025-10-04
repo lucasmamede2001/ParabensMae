@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 1</title>
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+        /*Geral*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #cfe2ff;
+            min-height: 100vh;
+            /* Mais seguro que 'height: 100vh' para mobile */
+        }
+
+        /*==========SITE==========*/
+        /*Cabeçalho*/
+        header {
+            background: linear-gradient(135deg, #c100f1, #430054);
+            padding: 20px 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 3rem;
+        }
+
+        .barradenavegacao {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            /* Permite quebrar a linha em telas médias */
+            justify-content: center;
+            /* Centraliza quando quebrar a linha */
+            gap: 20px 40px;
+            /* Espaçamento vertical e horizontal */
+            background: linear-gradient(135deg, #c100f1, #430054);
+            color: #cfe2ff;
+            padding: 30px 20px;
+        }
+
+        .barradenavegacao a h1 {
+            flex-basis: 100%;
+            /* Faz o H1 ocupar toda a largura se necessário */
+        }
+
+        .textonavegacao {
+            max-width: 500px;
+            /* Largura máxima para o texto */
+            font-weight: bold;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /*Informações*/
+        /* Container principal da seção */
+        .qualidade {
+            display: flex;
+            flex-direction: column;
+            /* Organiza os containers .pai-1 e .pai-2 verticalmente */
+            gap: 50px;
+            margin: 40px 6%;
+            padding-left: 10px;
+            color: rgb(7, 0, 81);
+        }
+
+        /* Containers de linha (agrupam os itens) */
+        .pai-1,
+        .pai-2 {
+            display: flex;
+            flex-wrap: wrap;
+            /* Permite que os itens quebrem para a linha de baixo */
+            justify-content: center;
+            /* Centraliza os itens na linha */
+            gap: 20px;
+        }
+
+        /* Cada card individual (texto ou imagem) */
+        .qualidade-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Centraliza o conteúdo verticalmente */
+            align-items: center;
+            /* Centraliza o conteúdo horizontalmente */
+            flex: 1 1 300px;
+            /* Base flexível para responsividade natural */
+            background-color: #f5f5ff;
+            padding: 20px;
+            border-radius: 15px;
+            transition: transform 0.2s;
+            text-align: center;
+            /* Centraliza o texto do h2 */
+        }
+
+        .qualidade-item p {
+            text-align: justify;
+            /* Mantém o parágrafo justificado para boa leitura */
+        }
+
+        .qualidade-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Imagem Responsiva e Centralizada */
+        .img-pg1 {
+            border-radius: 20px;
+            border: solid 3px black;
+            width: 100%;
+            /* A imagem ocupa 100% da largura do seu container */
+            height: auto;
+            /* A altura se ajusta para manter a proporção */
+            max-width: 400px;
+            /* Impede que a imagem fique grande demais */
+            object-fit: cover;
+        }
+
+        .qualidade-item h2 {
+            font-size: 40px;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos das bordas */
+        .div1 {
+            border-left: solid 7px rgb(103, 0, 106);
+        }
+
+        .div2 {
+            border-left: solid 7px rgb(165, 0, 230);
+        }
+
+        .div3 {
+            border-left: solid 7px rgb(193, 0, 200);
+        }
+
+        .div4 {
+            border-left: solid 7px rgb(255, 59, 245);
+        }
+
+        .p-pg1 {
+            line-height: 1.4;
+            font-size: large;
+            padding: 0 10px;
+        }
+
+        /* ======================================= */
+        /* ====== AJUSTES PARA TELAS MENORES ===== */
+        /* ======================================= */
+
+        @media (max-width: 768px) {
+
+            /* Força os containers de linha a se tornarem colunas */
+            .pai-1,
+            .pai-2 {
+                flex-direction: column;
+            }
+
+            /* Diminui o tamanho da fonte dos títulos para caber melhor */
+            .qualidade-item h2 {
+                font-size: 28px;
+            }
+        }
+
+        /*Informações Programação*/
+        .programacao {
+            margin: 40px auto;
+            padding: 0 5%;
+            max-width: 1200px;
+        }
+
+        .programacao-card {
+            background: #1e2b47;
+            color: #f0f0f0;
+            padding: 25px;
+            border-left: 7px solid #004aad;
+            border-radius: 15px;
+        }
+
+        .programacao-card h2 {
+            font-size: 2rem;
+        }
+
+        .programacao-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .bloco-codigo {
+            background: #0d1326;
+            color: #7fffd4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            overflow-x: auto;
+            font-size: 1.1rem;
+        }
+
+        /*==========JOGO1==========*/
+        #jogo-pg1 {
+            background: #240054;
+            padding: 50px 20px;
+            border-top: 10px solid #4b00ad;
+            display: flex;
+            justify-content: center;
+        }
+
+        #jogo {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 95%;
+            /* Largura flexível por padrão */
+            max-width: 550px;
+            /* Largura máxima para desktop */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        #instrucoes {
+            text-align: justify;
+        }
+
+        .titulo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #icone-dica {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform .2s;
+        }
+
+        #icone-dica:hover {
+            transform: scale(1.2);
+        }
+
+        #editor-codigo {
+            width: 100%;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 1rem;
+            background: #eaf0ff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .botoes-container{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+        }
+
+        button, .proxima-fase {
+ 
+            padding: 10px 15px;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: medium;
+            text-decoration: none;
+            display: inline-block; /* Para garantir que o link se comporte como um botão */
+            text-align: center;
+        }
+
+        #btn-executar {
+            width: 100%;          
+            background: #25006b;
+        }
+
+        #btn-executar:hover {
+            background: #25006b;
+            transition: 0.3s;
+            transform: translateY(-2px);
+        }
+
+        #btn-proxima-fase {
+            width: 100%;
+            background: #9228a7;
+        }
+
+        #btn-proxima-fase:hover {
+            background: #9228a7;
+        }
+
+        #console-saida {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border-radius: 5px;
+            min-height: 40px;
+            font-family: monospace;
+            border: 2px solid transparent;
+        }
+
+        .correto {
+            border-color: #28a745;
+        }
+
+        .incorreto {
+            border-color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos da Dica e Rodapé */
+        #dica-container,
+        footer {
+            text-align: center;
+        }
+
+        #dica-container {
+            position: fixed;
+            z-index: 1000;
+            top: 50%;
+            right: 0;
+            transform: translate(100%, -50%);
+            transition: transform 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #e4f2ff;
+            padding: 20px;
+            border-radius: 20px 0 0 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #dica-container.dica-visivel {
+            transform: translate(0, -50%);
+        }
+
+        .tartaruga-img {
+            width: 100px;
+        }
+
+        .balao-fala {
+            position: relative;
+            background: #fff;
+            padding: 20px;
+            padding-top: 10px;
+            padding-bottom: 30px;
+            border-radius: 15px;
+            max-width: 250px;
+            border: 2px solid #004aad;
+        }
+
+        .balao-fala::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid #fff;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #fechar-dica {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545; /* Cor de fechar para destaque */
+            color: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
+            text-align: center;
+            padding: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #fechar-dica:hover {
+            background: #c82333;
+        }
+
+
+        footer {
+            background: #670186;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .div-footer {
+            padding-bottom: 15px;
+        }
+
+        /* Animação de Balões */
+        .baloes-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .balao {
+            position: absolute;
+            bottom: -150px;
+        }
+
+        .balao img {
+            width: 80px;
+        }
+
+        @keyframes subirBalaoFinal {
+            100% {
+                transform: translateY(-120vh);
+                opacity: 10;
+            }
+        }
+
+        .balao {
+            animation: subirBalaoFinal 7s ease-out forwards;
+        }
+
+        /* ======================================= */
+        /* ========== MEDIA QUERY PARA MOBILE ========== */
+        /* ======================================= */
+
+        @media (max-width: 768px) {
+
+            /* --- Ajustes Gerais --- */
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .qualidade-item h2 {
+                font-size: 1.6rem;
+            }
+
+            .programacao-card h2 {
+                font-size: 1.6rem;
+            }
+
+            .p-pg1,
+            .programacao-card p {
+                font-size: 1rem;
+            }
+
+            /* --- Cabeçalho --- */
+            .barradenavegacao {
+                flex-direction: column;
+                /* Força o empilhamento vertical */
+                text-align: center;
+            }
+
+            /* --- Seção de Informações --- */
+            .pai-1,
+            .pai-2 {
+                flex-direction: column;
+                /* Garante que em telas pequenas, seja sempre uma coluna */
+            }
+
+            .qualidade {
+                padding: 0 3%;
+                /* Menos padding lateral no mobile */
+            }
+
+            /* --- Dica da Tartaruga --- */
+            #dica-container {
+                max-width: 90%;
+                padding: 10px;
+                gap: 5px;
+            }
+
+            .tartaruga-img {
+                width: 60px;
+            }
+
+            .balao-fala {
+                padding: 10px;
+                padding-bottom: 30px;
+                font-size: 0.9rem;
+            }
+
+            #fechar-dica {
+                font-size: 1.2rem;
+                top: 0;
+                right: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header>
+            <nav class="barradenavegacao">
+                <a href="index.html">
+                    <h1>PARABÉNS!!!</h1>
+                </a>
+                <a href="pagina2.html" class="textonavegacao">
+                    <p>Mãe, queria passar pra te desejar um feliz aniversário e agradecer por tudo o que a senhora já fez por mim!
+                    </p>
+                </a>
+            </nav>
+        </header>
+    </div>
+
+    <section class="qualidade" id="qualidade">
+
+        <div class="pai-1">
+            <div class="qualidade-item">
+                <h2 class="div1">Do que se trata esse site?</h2>
+                <p class="p-pg1">Esse site se trate de um peqeuno quiz, composto por 5 fases, para a melhor mãe do mundo!
+                    Onde são abertos botões que liberam a próxima fase, caso a resposta esteja correta.
+                </p>
+            </div>
+
+            <div class="qualidade-item">
+                <img src="imagens/imagem1.jpeg" alt="" class="img-pg1">
+            </div>
+
+            <div class="qualidade-item">
+                <h2 class="div2">Por que ele foi feito?</h2>
+                <p class="p-pg1">Pois se trata de uma maneira bem criativa para demonstrar o quanto sou grato a você!</p>
+            </div>
+        </div>
+
+        <div class="pai-1">
+            <div class="qualidade-item">
+                <h2 class="div3">Feliz Aniversário!</h2>
+                <p class="p-pg1">Mãe, queria te desejar um feliz aniversário, muitos anos de vida, muita saúde, paz....
+                    e queria também agradecer por ser minha mãe, você sempre faz de tudo por nós, sempre faz o que pode 
+                    e o que não pode para poder nos agradar, eu não poderia pedir alguém melhor na minha vida!
+                </p>
+            </div>
+
+            <div class="qualidade-item">
+                <img src="imagens/imagem2.jpg" alt="" class="img-pg1">
+            </div>
+
+            <div class="qualidade-item">
+                <h2 class="div4">Hoje completa mais um ano de vida!</h2>
+                <p class="p-pg1">Hoje, a melhor mãe, professora, esposa, filha, a melhor pessoa que eu conheço
+                    completa mais um ano de vida!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div id="jogo-pg1">
+        <div id="jogo">
+            <div id="info-fase">
+                <div class="titulo-container">
+                    <h2 id="titulo-fase">Fase 1</h2>
+                    <img src="imagens/lamp.png" alt="Dica" id="icone-dica" title="Pedir uma dica! (Custo: 10 pontos)">
+                </div>
+                <p id="instrucoes">Qual sua data de nascimento? "use esse modelo: **/**/****"</p>
+            </div>
+
+            <textarea id="editor-codigo" rows="10" cols="50" placeholder="Escreva sua resposta aqui..."></textarea>
+
+            <div class="botoes-container">
+                <div><button id="btn-executar">Verificar</button></div>
+                <div><a href="fase2.html" id="btn-proxima-fase" class="hidden proxima-fase">Próxima Fase</a></div>
+            </div>
+
+            <div id="console-saida">
+            </div>
+
+            <div id="hud-jogador">
+                <p>Pontos: <span id="pontuacao">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dica-container">
+        <!-- <img src="Imagens/img16.png" alt="Mascote de Dica" class="tartaruga-img"> -->
+        <div class="balao-fala">
+            <button id="fechar-dica">x</button>
+            <p id="texto-dica"></p>
+        </div>
+    </div>
+    <div class="baloes-container">
+    </div>
+
+    <footer>
+        <div class="div-footer">&copy; Feliz Aniversário!<br></div>
+        <div><b>Te amo muuuito!</b></div>
+    </footer>
+
+    <script>
+        // --- 1. Selecionar os elementos do HTML e Configurações Iniciais ---
+        const botaoVerificar = document.getElementById('btn-executar');
+        const botaoProximaFase = document.getElementById('btn-proxima-fase');
+        const iconeDica = document.getElementById('icone-dica');
+        const editorCodigo = document.getElementById('editor-codigo');
+        const consoleSaida = document.getElementById('console-saida');
+        const pontuacaoSpan = document.getElementById('pontuacao');
+        const dicaContainer = document.getElementById('dica-container');
+        const textoDica = document.getElementById('texto-dica');
+        const fecharDica = document.getElementById('fechar-dica');
+        const baloesContainer = document.querySelector('.baloes-container'); // Definido aqui!
+
+        // --- 2. Estrutura de Dados da Fase e Variáveis do Jogo ---
+        const faseAtual = {
+            numero: 1,
+            dica: "Não é possível que você precise dica pra isso...",
+            // Normalizando a condição para facilitar a comparação, removendo vírgulas, etc.
+            condicao: '04/10/1984'
+        };
+
+        let pontuacao = 10;
+        const pontuacaoSalva = localStorage.getItem('pontuacao');
+        if (pontuacaoSalva !== null) {
+            pontuacao = parseInt(pontuacaoSalva);
+            pontuacaoSpan.textContent = pontuacao;
+        }
+
+        // --- 3. Funções de Animação (Balões) ---
+
+        function criarBalaoUnico() {
+            const balaoDiv = document.createElement('div');
+            balaoDiv.classList.add('balao');
+
+            // IMAGEM DO BALÃO AQUI
+            const imagemBalao = document.createElement('img');
+            imagemBalao.src = "imagens/balao.png";
+            imagemBalao.alt = "Balão de Conclusão";
+            balaoDiv.appendChild(imagemBalao);
+
+            // Posiciona o balão aleatoriamente na parte inferior
+            const leftPosition = 5 + Math.random() * 90;
+            balaoDiv.style.left = `${leftPosition}vw`;
+
+            // Define a duração e o delay da animação para um efeito de "explosão de balões"
+            const animationDuration = 5 + Math.random() * 5;
+            const animationDelay = Math.random() * 0.5;
+            const rotation = Math.random() * 40 - 20;
+
+            // Animação CSS 'subirBalaoFinal' (Você deve ter este keyframe no seu CSS!)
+            balaoDiv.style.animation = `subirBalaoFinal ${animationDuration}s ease-out forwards`;
+            balaoDiv.style.transform = `translateY(100vh) rotate(${rotation}deg)`;
+            balaoDiv.style.animationDelay = `${animationDelay}s`;
+
+            // Remove o balão após a animação para limpar o DOM
+            balaoDiv.addEventListener('animationend', () => {
+                balaoDiv.remove();
+            });
+
+            baloesContainer.appendChild(balaoDiv);
+        }
+
+        // --- 4. Funções de Lógica do Jogo ---
+        function verificarCodigo() {
+            // Normaliza a entrada para ignorar maiúsculas/minúsculas e espaços em excesso
+            const codigoDoUsuario = editorCodigo.value.trim().toLowerCase().replace(/\s/g, '');
+            const condicaoNormalizada = faseAtual.condicao.toLowerCase().replace(/\s/g, '');
+
+            if (codigoDoUsuario.includes(condicaoNormalizada)) {
+
+                consoleSaida.textContent = 'Parabéns!!!';
+                consoleSaida.className = 'correto';
+
+                // Ativa a celebração de balões!
+                for (let i = 0; i < 20; i++) {
+                    criarBalaoUnico();
+                }
+
+                if (!botaoVerificar.disabled) {
+                    pontuacao += 10;
+                    pontuacaoSpan.textContent = pontuacao;
+                    localStorage.setItem('pontuacao', pontuacao);
+
+                }
+
+                botaoProximaFase.classList.remove('hidden');
+                botaoVerificar.disabled = true;
+            } else {
+                consoleSaida.textContent = 'Incorreto. Tente novamente ou clique na lâmpada para uma dica.';
+                consoleSaida.className = 'incorreto';
+            }
+        }
+
+        function mostrarDica() {
+            if (pontuacao >= 10) {
+                pontuacao -= 10;
+                pontuacaoSpan.textContent = pontuacao;
+                localStorage.setItem('pontuacao', pontuacao);
+                textoDica.textContent = faseAtual.dica;
+                dicaContainer.classList.add('dica-visivel');
+
+            } else {
+                alert("Você não tem pontos suficientes (mínimo de 10) para pedir uma dica!");
+            }
+        }
+
+        function ocultarDica() {
+            dicaContainer.classList.remove('dica-visivel');
+        }
+
+        function irParaProximaFase() {
+            window.location.href = 'pagina2.html';
+        }
+
+        // --- 5. Ouvintes ---
+        botaoVerificar.addEventListener('click', verificarCodigo);
+        iconeDica.addEventListener('click', mostrarDica);
+        botaoProximaFase.addEventListener('click', irParaProximaFase);
+        fecharDica.addEventListener('click', ocultarDica);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 2</title>
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+        /*Geral*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #e4f2ff;
+            color: #082644;
+        }
+
+        /*==========SITE==========*/
+        /*Cabeçalho*/
+        header {
+            background: linear-gradient(135deg, #c100f1, #430054);
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 3rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        /* Usando Flexbox para a navegação */
+        .barradenavegacao {
+            display: flex;
+            flex-wrap: wrap; /* Permite quebrar em telas menores */
+            background: linear-gradient(135deg, #c100f1, #430054);
+            padding: 20px;
+            justify-content: space-around;
+            align-items: center; /* Centraliza verticalmente */
+        }
+
+        .barradenavegacao a {
+            flex-grow: 1;
+            text-align: center;
+            padding: 10px 0; /* Adiciona padding para áreas de clique */
+        }
+
+        .textonavegacao {
+            width: 38%; /* Mantido para telas maiores, ajustado em media query */
+            text-align: center;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cfe2ff;
+            text-decoration: none;
+        }
+
+        /*Informações*/
+        .info {
+            display: grid;
+            /* Configuração de Grid para 2 colunas, se houver espaço */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #cde3ff;
+            align-items: center; /* Garante que o texto e a imagem fiquem alinhados */
+        }
+
+        .info img {
+            width: 100%;
+            /* max-width: 100%; Garante que a imagem não ultrapasse o container */
+            height: auto;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 3px solid black;
+            transition: transform 0.2s;
+        }
+
+        .info img:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-text {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .info-text h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #003366;
+        }
+
+        .info-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /*Cards*/
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+            display: flex; /* Adicionado flex para melhor layout interno se necessário */
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1; /* Faz com que o conteúdo do texto preencha o espaço restante */
+        }
+
+        .card-content h3 {
+            color: #004aad;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /*Curiosidades*/
+        .tabs {
+            background: #bcd8ff;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .tabs h2 {
+            margin-bottom: 20px;
+            color: #002b6d;
+        }
+
+        .tabs div:first-of-type {
+            /* Container dos botões */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+            gap: 10px;
+        }
+
+        .tabs button {
+            background: #004aad;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 0; /* Removido margin lateral */
+            border-radius: 5px;
+            cursor: pointer;
+            flex-grow: 0; /* Impede que os botões cresçam desnecessariamente */
+        }
+
+        .tabs button.active {
+            background: #001f54;
+        }
+
+        .tab-content {
+            max-width: 700px;
+            margin: 20px auto 0;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            min-height: 120px;
+            text-align: center;
+        }
+
+        /*Informações Programação*/
+        .programacao {
+            margin: 40px 6%;
+        }
+
+        .programacao-card {
+            background: #1e2b47;
+            color: #f0f0f0;
+            padding: 25px;
+            border-left: 7px solid #004aad;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .programacao-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #cfe2ff;
+        }
+
+        .programacao-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .bloco-codigo {
+            background: #0d1326;
+            color: #7fffd4;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            font-size: 1.1rem;
+            white-space: pre-wrap; /* Garante quebras de linha em textos longos */
+            word-wrap: break-word;
+        }
+
+        /*==========JOGO2==========*/
+        #jogo-pg2 {
+            background: #240054;
+            padding: 50px 20px;
+            border-top: 10px solid #4b00ad;
+            display: flex;
+            justify-content: center;
+            text-align: justify;
+        }
+
+        #jogo {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%; /* Faz o jogo ocupar 100% do container */
+            max-width: 500px; /* Mas limita a largura máxima */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .titulo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #icone-dica {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform .2s;
+        }
+
+        #icone-dica:hover {
+            transform: scale(1.2);
+        }
+
+        #editor-codigo {
+            width: 100%;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 1rem;
+            background: #eaf0ff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            resize: vertical; /* Permite redimensionar verticalmente */
+        }
+
+        button, .proxima-fase {
+            padding: 10px 15px;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: medium;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        #btn-executar {          
+            width: 100%;
+            background: #25006b;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        #btn-executar:hover {
+            background: #25006b;
+            transition: 0.3s;
+            transform: translateY(-2px);
+        }
+
+        #btn-proxima-fase {
+            width: 100%;
+            background: #9228a7;
+        }
+
+        #btn-proxima-fase:hover {
+            background: #9228a7;
+        }
+
+        #console-saida {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border-radius: 5px;
+            min-height: 40px;
+            font-family: monospace;
+            border: 2px solid transparent;
+        }
+
+        .correto {
+            border-color: #28a745;
+        }
+
+        .incorreto {
+            border-color: #dc3545;
+        }
+
+        .hidden {
+            display: none !important; /* Adicionado !important para maior certeza */
+        }
+
+        /* --- DICA / BALÃO DE FALA --- */
+        #dica-container {
+            position: fixed;
+            z-index: 1000;
+            top: 50%;
+            right: 0;
+            transform: translate(100%, -50%);
+            transition: transform 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #e4f2ff;
+            padding: 20px;
+            border-radius: 20px 0 0 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #dica-container.dica-visivel {
+            transform: translate(0, -50%);
+        }
+
+        .tartaruga-img {
+            width: 100px;
+            height: auto;
+        }
+
+        .balao-fala {
+            position: relative;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 250px;
+            border: 2px solid #004aad;
+            color: #082644;
+        }
+
+        .balao-fala::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid #fff;
+            border-left: 0;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            /* Adicionado um pequeno truque para a borda do balão */
+            box-shadow: 0 0 0 2px #004aad;
+            z-index: 1;
+        }
+
+        /* Corrigindo a borda do balão de fala */
+        .balao-fala::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid #004aad; /* Cor da borda */
+            border-left: 0;
+            left: -17px; /* 2px a mais para a borda */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 0; /* Fica por trás do balão de fala::before */
+        }
+
+
+        #fechar-dica {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545; /* Cor de fechar para destaque */
+            color: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
+            text-align: center;
+            padding: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #fechar-dica:hover {
+            background: #c82333;
+        }
+
+        /* Balões de Confete - Alteração para animação mais rápida e garantindo 100% de opacidade */
+        .baloes-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .balao {
+            position: absolute;
+            bottom: -200px;
+            opacity: 1; /* Garante que não haja transparência */
+        }
+
+        .balao img {
+            width: 80px;
+            height: auto;
+            display: block;
+        }
+
+        /* Keyframes para animação do balão */
+        @keyframes subirBalaoFinal {
+            0% {
+                transform: translateY(0vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 1;
+            }
+        }
+
+        /* Rodapé */
+        footer {
+            background: #670186;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .div-footer {
+            padding-bottom: 15px;
+        }
+
+        /* ============================== */
+        /* Responsividade        */
+        /* ============================== */
+
+        /* Telas Médias (e.g., Tablets em modo paisagem) */
+        @media (max-width: 1024px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .barradenavegacao {
+                flex-direction: column;
+                padding: 15px;
+                gap: 10px;
+            }
+
+            .textonavegacao {
+                width: 90%; /* Aumentado para melhor leitura em telas menores */
+                margin: 0 auto;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .info-text {
+                padding: 10px;
+            }
+
+            .info-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .cards {
+                padding: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .tabs {
+                padding: 20px;
+            }
+
+            .tabs button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .programacao {
+                margin: 20px 3%;
+            }
+
+            .programacao-card h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Telas Pequenas (e.g., Smartphones) */
+        @media (max-width: 600px) {
+            header {
+                padding: 20px 10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            #jogo-pg2 {
+                padding: 30px 10px;
+            }
+
+            #jogo {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            #editor-codigo {
+                font-size: 0.9rem;
+            }
+
+            .titulo-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .programacao-card h2 {
+                font-size: 1.8rem;
+            }
+
+            /* Ajuste para o container da dica em telas pequenas */
+            #dica-container {
+                right: 50%;
+                top: auto;
+                bottom: 0;
+                transform: translate(50%, 100%);
+                flex-direction: column-reverse;
+                border-radius: 20px 20px 0 0;
+                padding: 15px 10px;
+            }
+            #dica-container.dica-visivel {
+                transform: translate(50%, 0);
+            }
+
+            .balao-fala {
+                max-width: 95%; /* Ocupa quase toda a largura */
+                padding: 15px;
+                font-size: 0.9rem;
+                text-align: center;
+                margin-bottom: 10px; /* Espaçamento entre o balão e a tartaruga */
+            }
+
+            /* Correção do triângulo (ponta) do balão para o modo móvel (em cima) */
+            .balao-fala::before {
+                border-top: 15px solid #fff;
+                border-bottom: 0;
+                border-right: 15px solid transparent;
+                border-left: 15px solid transparent;
+                left: 50%;
+                top: auto;
+                bottom: -15px;
+                transform: translateX(-50%);
+            }
+            .balao-fala::after {
+                border-top: 15px solid #004aad;
+                border-bottom: 0;
+                border-right: 15px solid transparent;
+                border-left: 15px solid transparent;
+                left: 50%;
+                top: auto;
+                bottom: -17px;
+                transform: translateX(-50%);
+            }
+
+
+            .tartaruga-img {
+                width: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header>
+            <nav class="barradenavegacao">
+                <a href="pagina1.html">
+                    <h1>PARABÉNS!!!</h1>
+                </a>
+                <a href="pagina3.html" class="textonavegacao">
+                    <p>Não tem muito o que falar aqui, mas boa sorte!</p>
+                </a>
+            </nav>
+        </header>
+    </div>
+
+    <section class="info">
+        <img src="imagens/imagem3.jpg" alt="Correntes oceânicas">
+        <div class="info-text">
+    
+        </div>
+    </section>
+
+    <section class="cards">
+        <div class="card">
+            <img src="imagens/imagem4.jpg" alt="Plástico boiando">
+            <div class="card-content">
+            </div>
+        </div>
+        <div class="card">
+            <img src="imagens/imagem5.jpg" alt="Tecnologia oceânica">
+            <div class="card-content">
+            </div>
+        </div>
+        <div class="card">
+            <img src="imagens/imagem6.jpg" alt="Programadores">
+            <div class="card-content">
+            </div>
+        </div>
+    </section>
+
+    <section class="tabs">
+        <h2>Curiosidades Rápidas</h2>
+        <div>
+            <button class="tab-btn active" data-tab="1">professora</button>
+            <button class="tab-btn" data-tab="2">Mãe</button>
+            <button class="tab-btn" data-tab="3">Esposa</button>
+        </div>
+        <div id="tab-content" class="tab-content">
+            Professora de apoio e de quinto ano, agauradando outro contrato.
+        </div>
+    </section>
+
+
+    <div id="jogo-pg2">
+        <div id="jogo">
+            <div class="titulo-container">
+                <h2>Fase 2</h2>
+                <img src="imagens/lamp.png" alt="Dica" id="icone-dica" title="Pedir uma dica (Custo: 10 pontos)">
+            </div>
+            <p>Qual foi a primeira fase que eu falei?</strong>.
+            </p>
+
+            <textarea id="editor-codigo" rows="8" cols="50" placeholder="Escreva sua resposta aqui..."></textarea>
+
+            <div id="botoes-container">
+                <button id="btn-executar">Verificar</button>
+                <a href="fase3.html" id="btn-proxima-fase" class="hidden proxima-fase">Próxima Fase</a>
+            </div>
+
+            <div id="console-saida"></div>
+            <p style="margin-top:10px;">Pontos: <span id="pontuacao">0</span></p>
+        </div>
+    </div>
+
+    <div id="dica-container">
+        <div class="balao-fala">
+            <button id="fechar-dica">x</button>
+            <p id="texto-dica"></p>
+        </div>
+    </div>
+    <div class="baloes-container">
+    </div>
+
+    <footer>
+        <div class="div-footer">&copy; Feliz Aniversário!<br></div>
+        <div><b>Te amo muuuito!</b></div>
+    </footer>
+
+    <script>
+        // ---------- Tabs ----------
+        const buttons = document.querySelectorAll('.tab-btn');
+        const tabContent = document.getElementById('tab-content');
+        const texts = [
+            "Professora de apoio e de quinto ano ,agauradando outro contrato.",
+            "Mãe de dois filhos, Lucas (o mais lindo) e Vinicius.",
+            "Esposa de Idalmo há alguns bons anos!"
+        ];
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                tabContent.textContent = texts[parseInt(btn.dataset.tab) - 1];
+            });
+        });
+
+        // ---------- Jogo ----------
+        const botaoVerificar = document.getElementById('btn-executar');
+        const botaoProximaFase = document.getElementById('btn-proxima-fase');
+        const iconeDica = document.getElementById('icone-dica');
+        const editorCodigo = document.getElementById('editor-codigo');
+        const consoleSaida = document.getElementById('console-saida');
+        const pontuacaoSpan = document.getElementById('pontuacao');
+        const dicaContainer = document.getElementById('dica-container');
+        const textoDica = document.getElementById('texto-dica');
+        const fecharDica = document.getElementById('fechar-dica');
+        const baloesContainer = document.querySelector('.baloes-container');
+
+
+        const faseAtual = {
+            numero: 2,
+            dica: 'Tem relação com comida, continuo falando com requência.',
+            condicaoAtribuicao: 'Tô com fome!',
+        };
+
+        let pontuacao = 0;
+        const pontuacaoSalva = localStorage.getItem('pontuacao');
+        if (pontuacaoSalva !== null) {
+            pontuacao = parseInt(pontuacaoSalva);
+            pontuacaoSpan.textContent = pontuacao;
+        }
+
+        // Função para criar a animação de balão (confete)
+        function criarBalaoUnico() {
+            const balaoDiv = document.createElement('div');
+            balaoDiv.classList.add('balao');
+
+            const imagemBalao = document.createElement('img');
+            imagemBalao.src = "imagens/balao.png";
+            imagemBalao.alt = "Balão de Conclusão";
+            balaoDiv.appendChild(imagemBalao);
+
+            const leftPosition = 5 + Math.random() * 90;
+            balaoDiv.style.left = `${leftPosition}vw`;
+
+            // Mantendo a animação mais rápida e o delay baixo
+            const animationDuration = 2 + Math.random() * 3; // De 2s a 5s
+            const animationDelay = Math.random() * 0.2; // Menos delay para começar mais rápido
+            const rotation = Math.random() * 40 - 20;
+
+            balaoDiv.style.animation = `subirBalaoFinal ${animationDuration}s ease-out forwards`;
+            balaoDiv.style.transform = `translateY(100vh) rotate(${rotation}deg)`;
+            balaoDiv.style.animationDelay = `${animationDelay}s`;
+
+            balaoDiv.addEventListener('animationend', () => {
+                balaoDiv.remove();
+            });
+
+            baloesContainer.appendChild(balaoDiv);
+        }
+
+        function verificarCodigo() {
+            // Normalize user input to ignore case and all whitespace
+            const codigoDoUsuario = editorCodigo.value.toLowerCase().replace(/\s/g, '');
+
+            // Normalize both conditions from the faseAtual object
+            const condicaoAtribuicaoNormalizada = faseAtual.condicaoAtribuicao.toLowerCase().replace(/\s/g, '');
+
+            // Check if the user's code includes BOTH required conditions
+            if (codigoDoUsuario.includes(condicaoAtribuicaoNormalizada) ) {
+
+                // A lógica abaixo tenta simular a execução, assumindo que a variável "poluicao" foi declarada (pois a instrução fala de atribuição e escrita, e o bloco de código de exemplo mostra a declaração).
+                // Uma implementação mais robusta de VisuAlg exigiria um parser/interpretador.
+                // Aqui, verificamos a *forma* correta:
+                const saidaSimulada = 250; // O valor esperado
+                
+                consoleSaida.textContent = `Parabéns!!!`;
+                consoleSaida.className = 'correto';
+
+                // Ativa a celebração de balões!
+                for (let i = 0; i < 20; i++) {
+                    criarBalaoUnico();
+                }
+
+                if (!botaoVerificar.disabled) {
+                    pontuacao += 10;
+                    pontuacaoSpan.textContent = pontuacao;
+                    localStorage.setItem('pontuacao', pontuacao);
+                }
+
+                botaoProximaFase.classList.remove('hidden');
+                botaoVerificar.disabled = true;
+
+            } else {
+                consoleSaida.textContent = 'Incorreto. Certifique-se de atribuir o valor (poluicao <- 250) e usar escreva(poluicao).';
+                consoleSaida.className = 'incorreto';
+            }
+        }
+
+        // --- DICA ---
+        function mostrarDica() {
+            if (pontuacao >= 10) {
+                pontuacao -= 10;
+                pontuacaoSpan.textContent = pontuacao;
+                localStorage.setItem('pontuacao', pontuacao);
+
+                textoDica.textContent = faseAtual.dica + "\n";
+                dicaContainer.classList.add('dica-visivel');
+
+            } else {
+                alert("Você não tem pontos suficientes (mínimo de 10) para pedir uma dica!");
+            }
+        }
+
+        function ocultarDica() {
+            dicaContainer.classList.remove('dica-visivel');
+        }
+
+        botaoVerificar.addEventListener('click', verificarCodigo);
+        iconeDica.addEventListener('click', mostrarDica);
+        fecharDica.addEventListener('click', ocultarDica);
+    </script>
+
+</body>
+
+</html>

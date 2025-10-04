@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase Final</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #e4f2ff;
+            color: #082644;
+            overflow-x: hidden;
+            height: 100%;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, #c100f1, #430054);
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 3rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        .barradenavegacao {
+            display: flex;
+            background: linear-gradient(135deg, #c100f1, #430054);
+            padding: 20px;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .barradenavegacao a {
+            width: 36%;
+        }
+
+        .textonavegacao {
+            width: 38%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cfe2ff;
+            text-decoration: none;
+        }
+
+        .secao-conclusao {
+            background: linear-gradient(135deg, #cfe2ff, #a7c9f7);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .secao-conclusao h2 {
+            font-size: 3.5rem;
+            color: #001f54;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .secao-conclusao p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            color: #082644;
+        }
+
+        .secao-conclusao img {
+            max-width: 70%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+            border: 5px solid #004aad;
+            transition: transform 0.3s;
+        }
+
+        .secao-conclusao img:hover {
+            transform: scale(1.02);
+        }
+
+        .resumo-aprendizado {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 40px 6%;
+            background: #e4f2ff;
+        }
+
+        .resumo-item {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .resumo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .resumo-item h3 {
+            font-size: 1.8rem;
+            color: #004aad;
+            margin-bottom: 15px;
+        }
+
+        .resumo-item p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .secao-acao {
+            background: #240054;
+            border-top: 10px solid #4b00ad;
+            color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            width: 70%;
+            border-radius: 20px;
+        }
+
+        .secao-acao h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: #cfe2ff;
+        }
+
+        .secao-acao p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .btn-iniciar-novamente {
+            background: #9228a7;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-iniciar-novamente:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+
+        /* Jogo */
+        #jogo-final {
+            background: #240054;
+            padding: 40px 20px;
+            border-top: 10px solid #4b00ad;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #quiz-final {
+            background: #f0f5ff;
+            padding: 30px;
+            border-radius: 12px;
+            width: 600px;
+            max-width: 90%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: justify;
+        }
+
+        #quiz-final h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #003366;
+            text-align: center;
+        }
+
+        #quiz-final p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .opcoes-quiz {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .opcao-btn-quiz {
+            background: #25006b;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-align: left;
+        }
+
+        .opcao-btn-quiz:hover {
+            background: #9228a7;
+            transform: translateY(-2px);
+        }
+
+        #feedback-quiz {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .correto-quiz {
+            color: #28a745;
+        }
+
+        .incorreto-quiz {
+            color: #dc3545;
+        }
+
+        .pontuacao-final-display {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #001f54;
+        }
+
+        /* Rodapé */
+        footer {
+            background: #670186;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .div-footer {
+            padding-bottom: 15px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+
+            .info-grid,
+            .resumo-aprendizado {
+                grid-template-columns: 1fr;
+            }
+
+            .secao-conclusao h2 {
+                font-size: 2.5rem;
+            }
+
+            .secao-conclusao p {
+                font-size: 1rem;
+            }
+
+            #quiz-final {
+                width: 95%;
+            }
+        }
+        /* Ajustes de Responsividade */
+
+        /* Para Telas Médias e Tablets (max-width: 992px) */
+        @media (max-width: 992px) {
+            /* Cabeçalho */
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .barradenavegacao {
+                flex-direction: column;
+                padding: 15px 20px;
+                text-align: center;
+            }
+            
+            .barradenavegacao a {
+                width: 100%;
+            }
+
+            .textonavegacao {
+                width: 100%;
+                margin-top: 10px;
+                font-size: 1rem;
+            }
+
+            /* Seção de Conclusão */
+            .secao-conclusao {
+                padding: 40px 15px;
+            }
+
+            .secao-conclusao h2 {
+                font-size: 2.8rem;
+                margin-bottom: 20px;
+            }
+
+            .secao-conclusao p {
+                font-size: 1.1rem;
+            }
+
+            .secao-conclusao img {
+                max-width: 90%; /* Aumenta o tamanho da imagem */
+            }
+
+            /* Resumo de Aprendizado */
+            .resumo-aprendizado {
+                grid-template-columns: 1fr; /* Muda para uma coluna única */
+                padding: 30px 4%;
+                gap: 20px;
+            }
+
+            .resumo-item h3 {
+                font-size: 1.5rem;
+            }
+            
+            /* Quiz Final */
+            #quiz-final {
+                width: 95%;
+                padding: 25px;
+            }
+            
+            #quiz-final h2 {
+                font-size: 1.8rem;
+            }
+
+            .opcao-btn-quiz {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+
+            /* Seção de Ação */
+            .secao-acao {
+                width: 95%; /* Ocupa a largura total */
+                margin: 40px auto;
+                padding: 35px 20px;
+            }
+
+            .secao-acao h2 {
+                font-size: 2rem;
+            }
+
+            .secao-acao p {
+                font-size: 1.1rem;
+            }
+
+            .btn-iniciar-novamente {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+
+            /* Rodapé */
+            footer {
+                padding: 15px;
+            }
+        }
+
+        /* Para Telas de Celular (max-width: 576px) */
+        @media (max-width: 576px) {
+            
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .secao-conclusao h2 {
+                font-size: 2rem;
+            }
+
+            .secao-conclusao p {
+                font-size: 0.95rem;
+            }
+
+            #quiz-final h2 {
+                font-size: 1.5rem;
+            }
+            
+            /* Ajusta a fonte do quiz */
+            #quiz-final p {
+                font-size: 0.95rem;
+            }
+
+            .pontuacao-final-display {
+                font-size: 1.1rem;
+            }
+
+            .secao-acao h2 {
+                font-size: 1.5rem;
+            }
+            
+            .secao-acao p {
+                font-size: 1rem;
+            }
+        }
+        button img{
+            max-width: 100%;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header>
+            <nav class="barradenavegacao">
+                <a href="pagina4.html">
+                    <h1>PARABÉNS!!!</h1>
+                </a>
+            </nav>
+        </header>
+    </div>
+
+    <section class="secao-conclusao">
+        <h2>Parabéns!!!</h2>
+        <p>De novo, queria agradecer por tudo e lembrar do queanto você é uma pessoa, incrível, maravilhosa, inteligente...
+            enfim, não exite teclado que suporte digitar todas suas qualidades!
+        </p>
+        <img src="imagens/imagem7.jpg" alt="Oceano saudável">
+    </section>
+
+    <div id="jogo-final">
+        <div id="quiz-final">
+            <h2>Quiz Final</h2>
+            <p>
+                Para finalizae o quiz e receber sua premiação, responda à última pergunta!
+            </p>
+            <p><strong>Qual a foto mais bonita?</strong></p>
+
+            <div class="opcoes-quiz">
+                <button class="opcao-btn-quiz" onclick="verificarRespostaQuiz('laços de repetição')">A) <img src="imagens/imagem7.jpg" alt=""></button>
+                <button class="opcao-btn-quiz" onclick="verificarRespostaQuiz('variáveis')">B) <img src="imagens/imagem8.jpg" alt=""></button>
+                <button class="opcao-btn-quiz" onclick="verificarRespostaQuiz('estruturas de decisão')">C) <img src="imagens/imagem9.jpg" alt=""></button>
+                <button class="opcao-btn-quiz" onclick="verificarRespostaQuiz('algoritmos')">D) <img src="imagens/imagem10.jpg" alt=""></button>
+            </div>
+
+            <p id="feedback-quiz"></p>
+            <p class="pontuacao-final-display">Pontuação Final: <span id="pontuacao">0</span></p>
+        </div>
+
+
+        <section class="secao-acao">
+            <a href="premios.html" class="btn-iniciar-novamente">Ver prêmios</a>
+        </section>
+    </div>
+    <div class="baloes-container">
+    </div>
+
+    <footer>
+        <div class="div-footer">&copy; Feliz Aniversário!<br></div>
+        <div><b>Te amo muuuito!</b></div>
+    </footer>
+
+    <script>
+        const feedbackQuiz = document.getElementById('feedback-quiz');
+        const pontuacaoSpan = document.getElementById('pontuacao');
+        const botoesQuiz = document.querySelectorAll('.opcao-btn-quiz');
+        const baloesContainer = document.querySelector('.baloes-container');
+
+        let pontuacao = parseInt(localStorage.getItem('pontuacao')) || 0;
+        pontuacaoSpan.textContent = pontuacao;
+
+        const perguntaFinal = {
+            respostaCorreta: 'estruturas de decisão',
+        };
+
+        // Funções para a Criação e Animação dos Balões
+
+        function criarBalaoUnico() {
+            const balaoDiv = document.createElement('div');
+            balaoDiv.classList.add('balao');
+
+            // IMAGEM DO BALÃO AQUI
+            // Certifique-se de que o caminho 'Imagens/balao.png' está correto
+            const imagemBalao = document.createElement('img');
+            imagemBalao.src = "Imagens/balao.png";
+            imagemBalao.alt = "Balão de Conclusão";
+            balaoDiv.appendChild(imagemBalao);
+
+            // A LÓGICA DE MENSAGEM FOI REMOVIDA DAQUI
+
+            // Posiciona o balão aleatoriamente na parte inferior
+            const leftPosition = 5 + Math.random() * 90;
+            balaoDiv.style.left = `${leftPosition}vw`;
+
+            // Define a duração e o delay da animação para um efeito de "explosão de balões"
+            const animationDuration = 5 + Math.random() * 5;
+            const animationDelay = Math.random() * 0.5; // Delay menor para ser mais instantâneo
+            const rotation = Math.random() * 40 - 20;
+
+            // Animação CSS 'subirBalaoFinal'
+            balaoDiv.style.animation = `subirBalaoFinal ${animationDuration}s ease-out forwards`;
+            balaoDiv.style.transform = `translateY(100vh) rotate(${rotation}deg)`;
+            balaoDiv.style.animationDelay = `${animationDelay}s`;
+
+            // Remove o balão após a animação para limpar o DOM
+            balaoDiv.addEventListener('animationend', () => {
+                balaoDiv.remove();
+            });
+
+            baloesContainer.appendChild(balaoDiv);
+        }
+
+
+        let tentativas = 0;
+        const mensagensErro = [
+            'Incorreto. Tente novamente!',
+            'Ops! Não está correto, tente outra vez!',
+            'Raapaaaaaiz... Tá certo isso???',
+            'Ou será que era a D?',
+            'Na verdade, tenta a A',
+            'Ahhhh, só sobrou a B, então!',
+            'Ué... tenta a D de novo.',
+            'Brincadeira, parei, a resposta é C, mas todas são lindas!',
+        ];
+
+        function verificarRespostaQuiz(resposta) {
+            if (localStorage.getItem('faseFinalConcluida') !== 'true') {
+                if (resposta === perguntaFinal.respostaCorreta) {
+                    if (tentativas > 6) {
+                        feedbackQuiz.textContent = 'Finalmente kkkkkkk, parabéns!!!';
+                        pontuacao += 0;
+                        pontuacaoSpan.textContent = pontuacao;
+                        localStorage.setItem('pontuacao', pontuacao);
+                        localStorage.setItem('faseFinalConcluida', 'true');
+                        botoesQuiz.forEach(btn => btn.disabled = true);
+                        for (let i = 0; i < 40; i++) {
+                            criarBalaoUnico();
+                        }
+                    } else
+                    feedbackQuiz.textContent = 'Parabéns, quiz concluído! Mas todas as fotos são lindas.';
+                    feedbackQuiz.className = 'correto-quiz';
+                    pontuacao += 10;
+                    pontuacaoSpan.textContent = pontuacao;
+                    localStorage.setItem('pontuacao', pontuacao);
+                    localStorage.setItem('faseFinalConcluida', 'true');
+                    botoesQuiz.forEach(btn => btn.disabled = true);
+                    for (let i = 0; i < 40; i++) {
+                        criarBalaoUnico();
+                    }
+                } else {
+                    tentativas++;
+                    const idx = (tentativas - 1) % mensagensErro.length;
+                    feedbackQuiz.textContent = mensagensErro[idx];
+                    feedbackQuiz.className = 'incorreto-quiz';
+                }
+            } else {
+                feedbackQuiz.textContent = 'Você já respondeu a esta pergunta final!';
+                feedbackQuiz.className = 'incorreto-quiz';
+            }
+        }
+
+        const btnNovaJornada = document.querySelector('.btn-iniciar-novamente');
+
+        btnNovaJornada.addEventListener('click', function () {
+            localStorage.setItem('pontuacao', '0');
+            localStorage.removeItem('faseFinalConcluida');
+        });
+
+    </script>
+</body>
+
+</html>
